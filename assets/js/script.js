@@ -14,7 +14,7 @@
   var answer 
 
 
-  function getRandonWord(){
+  function getRandomWord(){
   var randomIdx = Math.floor(Math.random() * words.length)
   answer = words[randomIdx]
   console.log(answer)
