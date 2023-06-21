@@ -17,30 +17,37 @@
   function getRandonWord(){
   var randomIdx = Math.floor(Math.random() * words.length)
   answer = words[randomIdx]
+  console.log(answer)
   } 
 
 
   function renderWord(){
     var blanks = ""
     for (var i=0; i < answer.length; i++){
-      blanks += "_"
+      var letter = answer[i]
+      if (userGuesses.includes(letter)){
+        blanks += letter
+      } else {
+        blanks += "_"
+      }
   } 
   wordBlanksEl.innerText = blanks.split('').join(' ')
-}
+  }
+
 
   function startRound() {
-    
-    var randomWord = getRandonWord()
-   renderWord(randomWord)
+    getRandonWord()
+    renderWord()
 
     }
   
 
-
   function onKeydown(event) {
-    // check if letter pressed is in the answer string
-      // if yes
-        // reveal letter in word-blanks
+    if (answer.includes(event.key) && !userGuesses.includes(event.key) ){
+      userGuesses.push(event.key)
+    }
+    renderWord()
+
   }
 
 
@@ -63,5 +70,7 @@
   // Event Listeners
     // start - startRound()
     startButton.addEventListener('click' , startRound)
+
+    document.body.addEventListener('keypress' , onKeydown)
     // reset
     // keydown - onKeydown
